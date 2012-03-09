@@ -1,0 +1,11 @@
+This library makes it possible to easily generate an affiliate link for LinkShare or CommissionJunction network.
+
+Usage:
+
+CommisionJunction:
+
+CommissionJunctionService cjs = new CommisionJunctionService("your dev key", "pid");
+cjs.generateLink("N82E16882021123", "default/url")
+
+LinkShareService lss = new LinkShareService("your dev key", "site key");
+lss.generateLink("http://mobile.buy.com/ibuy/Product.aspx?sku=221894403")
