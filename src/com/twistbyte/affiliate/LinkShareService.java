@@ -1,4 +1,6 @@
- *****************************************************************************************************************************************************************
+package com.twistbyte.affiliate;
+
+/**
  * Copyright (c) 2012 TwistByte LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -10,16 +12,47 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *************************************************************************************************************************************************************************
+ *
+ *The service object that will access LinkShare webservice API to generate links for a sites url
+ *
+ * User: cbrandt
+ */
+public class LinkShareService {
 
-This library makes it possible to easily generate an affiliate link for LinkShare or CommissionJunction network.
+    private static final String prefix = "http://getdeeplink.linksynergy.com/createcustomlink.shtml?";
 
-Usage:
+    private String key;
+    private String mid;
+    private final HttpUtility httpUtility = new HttpUtility();
 
-CommisionJunction:
+    public LinkShareService(String key, String mid){
+        this.key = key;
+        this.mid = mid;
 
-CommissionJunctionService cjs = new CommisionJunctionService("your dev key", "pid");
-cjs.generateLink("N82E16882021123", "default/url")
+    }
 
-LinkShareService lss = new LinkShareService("your dev key", "site key");
-lss.generateLink("http://mobile.buy.com/ibuy/Product.aspx?sku=221894403")
+
+    public String generateLink(String url){
+
+        String callUrl = prefix + "token=" + key + "&mid=" + mid + "&murl=" + url;
+
+        HttpResult r  = httpUtility.doGet(callUrl);
+
+        if (r.getBody() == null){
+            return url;
+        }
+
+        return r.getBody();
+
+    }
+
+    public static void main(String[] args){
+        LinkShareService ls = new LinkShareService("your dev key","your mid");
+        System.out.println(ls.generateLink("http://mobile.buy.com/ibuy/Product.aspx?sku=221894403"));
+
+    }
+
+
+
+
+}

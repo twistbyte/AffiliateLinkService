@@ -1,4 +1,6 @@
- *****************************************************************************************************************************************************************
+package com.twistbyte.affiliate;
+
+/**
  * Copyright (c) 2012 TwistByte LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -10,16 +12,38 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *************************************************************************************************************************************************************************
+ *
+ * HttpResult
+ */
+public class HttpResult {
+    boolean success;
+    int httpStatus;
+    String body;
 
-This library makes it possible to easily generate an affiliate link for LinkShare or CommissionJunction network.
+    public HttpResult() {
+    }
 
-Usage:
+    public boolean isSuccess() {
+        return success;
+    }
 
-CommisionJunction:
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
-CommissionJunctionService cjs = new CommisionJunctionService("your dev key", "pid");
-cjs.generateLink("N82E16882021123", "default/url")
+    public int getHttpStatus() {
+        return httpStatus;
+    }
 
-LinkShareService lss = new LinkShareService("your dev key", "site key");
-lss.generateLink("http://mobile.buy.com/ibuy/Product.aspx?sku=221894403")
+    public void setHttpStatus(int httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+}
