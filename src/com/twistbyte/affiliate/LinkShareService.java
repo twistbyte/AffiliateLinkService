@@ -21,8 +21,8 @@ public class LinkShareService {
 
     private static final String prefix = "http://getdeeplink.linksynergy.com/createcustomlink.shtml?";
 
-    private String key;
-    private String mid;
+    private final String key;
+    private final String mid;
     private final HttpUtility httpUtility = new HttpUtility();
 
     public LinkShareService(String key, String mid){

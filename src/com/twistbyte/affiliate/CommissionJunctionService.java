@@ -1,6 +1,7 @@
 package com.twistbyte.affiliate;
 
 
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -29,6 +30,7 @@ import java.util.Map;
  */
 public class CommissionJunctionService {
 
+    private static final Logger logger = Logger.getLogger(CommissionJunctionService.class);
 
     private static final String prefix = "https://product-search.api.cj.com/v2/product-search";
     public static final String AUTHENTICATION_KEY = "authorization";
@@ -92,13 +94,16 @@ public class CommissionJunctionService {
             Document doc = DocumentHelper.parseText(xml);
             XPath xpath = new Dom4jXPath("//" + prop);
             List nodes = xpath.selectNodes(doc);
-            String url = ((Element) nodes.get(0)).getText();
-
-            return url;
+            if (nodes != null && !nodes.isEmpty()){
+                String url = ((Element) nodes.get(0)).getText();
+                return url;
+            } else{
+                logger.info("buy-url not found in result, Item probably not found");
+            }
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(null, e);
         }
 
         return null;
@@ -111,9 +116,9 @@ public class CommissionJunctionService {
 
 
     public static void main(String[] args) {
-        CommissionJunctionService cj = new CommissionJunctionService("dev key", "your pid");
-        System.out.println(cj.generateMobileLink("N82E16882021123", "default/url", "newegg"));
-        System.out.println(cj.generateLink("N82E16882021123", "default/url"));
+        CommissionJunctionService cj = new CommissionJunctionService("your key", "site id");
+        System.out.println(cj.generateMobileLink("N82E16882780018", "default/url", "newegg"));
+        System.out.println(cj.generateLink("N82E16882780018", "default/url"));
 
     }
 }
