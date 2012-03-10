@@ -38,6 +38,12 @@ public class LinkShareService {
 
         HttpResult r  = httpUtility.doGet(callUrl);
 
+        // if server error return back url passed
+        if (!r.isSuccess()){
+            return url;
+        }
+
+        // if no response pass back url
         if (r.getBody() == null){
             return url;
         }
