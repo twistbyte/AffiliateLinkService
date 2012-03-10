@@ -8,11 +8,15 @@ making calls to the webservice provided by each network
 
 Example CommissionJunction:
 
+CommissionJunction requires the dev key, seller id, and the item id of the page you want to link to
+
 CommissionJunctionService cjs = new CommisionJunctionService("your dev key", "pid");
 cjs.generateLink("N82E16882021123", "default/url")
 
 
 Example LinkShare:
 
-LinkShareService lss = new LinkShareService("your dev key", "site key");
+LinkShare requires the dev key, seller id, and the url you want to link to
+
+LinkShareService lss = new LinkShareService("your dev key", "site id");
 lss.generateLink("http://mobile.buy.com/ibuy/Product.aspx?sku=221894403")
